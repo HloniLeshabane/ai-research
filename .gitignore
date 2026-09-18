@@ -6,3 +6,9 @@ dist-ssr
 
 # Claude Code machine-local settings (launch.json stays tracked)
 .claude/settings.local.json
+
+# Personal: Wits MSc application material (email drafts, proposals)
+scratch/wits/
+
+# Generated figures from scratch experiments
+scratch/out/

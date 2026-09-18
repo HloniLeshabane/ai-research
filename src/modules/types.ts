@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { ComponentType } from 'react';
 import type { NdArray } from '../pyodide/bridge';
 
 export type { NdArray };
@@ -26,16 +26,25 @@ export interface VisualProps<TState> {
   status: RunStatus;
 }
 
+// The teaching content shown above the editor for each module.
+export interface Lesson {
+  concept: string; // what it is and why it matters
+  bridge?: string; // the electrical-engineering analogy
+  tryThis?: string[]; // suggested experiments
+}
+
 // The contract every lab module implements. Adding a concept = implement this
-// interface and register it in registry.ts.
+// interface and add a CurriculumEntry pointing at it.
 export interface LabModule<TState> {
   id: string;
   title: string;
+  section: string;
   blurb: string;
+  lesson: Lesson;
   packages: string[]; // pyodide packages to ensure are loaded, e.g. ['numpy']
-  defaultCode: string; // seed Python shown in the editor
+  defaultCode: string; // prebuilt Python shown in the editor
   outputs: string[]; // Python global names to extract after each run
   controls?: ControlSpec[]; // optional sliders injected as Python globals
   extract(values: Record<string, unknown>): TState; // raw extraction -> typed state
-  Visual: (props: VisualProps<TState>) => ReactNode; // right-panel renderer
+  Visual: ComponentType<VisualProps<TState>>; // right-panel renderer
 }
