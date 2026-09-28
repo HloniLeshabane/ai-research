@@ -12,3 +12,4 @@ scratch/wits/
 
 # Generated figures from scratch experiments
 scratch/out/
+__pycache__/

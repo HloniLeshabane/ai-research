@@ -8,6 +8,8 @@ import react from '@vitejs/plugin-react';
 // "Invalid hook call" crash).
 export default defineConfig({
   plugins: [react()],
+  // GitHub Pages serves from /ai-research/; local dev stays at /
+  base: process.env.BASE_PATH ?? '/',
   // honor an externally assigned port (preview harnesses set PORT); default 5173
   server: { port: Number(process.env.PORT) || 5173 },
   worker: { format: 'es' },
